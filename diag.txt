@@ -1,0 +1,197 @@
+## Versions
+v22.15.1
+10.9.2
+Next.js v15.4.6
+
+## Env (.env.local – redacted service key length only)
+No .env.local present
+
+## Important files present?
+.env.example
+.git
+.gitignore
+diag.txt
+diagnostics.sh
+eslint.config.mjs
+next.config.ts
+node_modules
+package-lock.json
+package.json
+postcss.config.mjs
+public
+README.md
+seed.sql
+src
+tsconfig.json
+
+ - found package.json
+ - found tsconfig.json
+ - found next.config.ts
+ - found public
+
+## package.json
+{
+  "name": "mm-cancel-flow",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint || echo 'lint skipped'",
+    "typecheck": "tsc --noEmit",
+    "db:setup": "supabase db reset --local || echo 'stub db:setup (adjust per repo)'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.3",
+    "next": "15.4.6",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "@types/react": "^18.3.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.6.2"
+  }
+}
+
+## tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "es2022"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "preserve",
+    "strict": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": { "@/*": ["./*"] },
+    "types": ["node"]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}
+
+## next.config.*
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  reactStrictMode: true
+};
+
+export default nextConfig;
+
+## Check for common Edge runtime gotchas (Node APIs in edge routes)
+
+## Supabase admin client usage
+
+## Typecheck
+node_modules/next/dist/server/route-modules/app-page/vendored/rsc/entrypoints.d.ts(5,39): error TS2307: Cannot find module 'react/compiler-runtime' or its corresponding type declarations.
+node_modules/next/dist/server/route-modules/app-page/vendored/ssr/entrypoints.d.ts(5,39): error TS2307: Cannot find module 'react/compiler-runtime' or its corresponding type declarations.
+node_modules/next/dist/server/web/spec-extension/adapters/headers.d.ts(39,16): error TS2304: Cannot find name 'HeadersIterator'.
+node_modules/next/dist/server/web/spec-extension/adapters/headers.d.ts(40,13): error TS2304: Cannot find name 'HeadersIterator'.
+node_modules/next/dist/server/web/spec-extension/adapters/headers.d.ts(41,15): error TS2304: Cannot find name 'HeadersIterator'.
+node_modules/next/dist/server/web/spec-extension/adapters/headers.d.ts(42,26): error TS2304: Cannot find name 'HeadersIterator'.
+src/app/cancel/confirm/page.tsx(2,22): error TS2307: Cannot find module '@/components/Progress' or its corresponding type declarations.
+src/app/cancel/confirm/page.tsx(3,30): error TS2307: Cannot find module '@/lib/csrf' or its corresponding type declarations.
+src/app/cancel/downsell/page.tsx(3,22): error TS2307: Cannot find module '@/components/Progress' or its corresponding type declarations.
+src/app/cancel/downsell/page.tsx(4,39): error TS2307: Cannot find module '@/lib/flow' or its corresponding type declarations.
+src/app/cancel/downsell/page.tsx(5,30): error TS2307: Cannot find module '@/lib/csrf' or its corresponding type declarations.
+src/app/cancel/reason/page.tsx(3,30): error TS2307: Cannot find module '@/lib/csrf' or its corresponding type declarations.
+src/app/cancel/reason/page.tsx(4,22): error TS2307: Cannot find module '@/components/Progress' or its corresponding type declarations.
+src/app/cancel/start/page.tsx(3,42): error TS2307: Cannot find module '@/lib/flow' or its corresponding type declarations.
+src/components/Progress.tsx(4,18): error TS2307: Cannot find module 'clsx' or its corresponding type declarations.
+src/lib/csrf.ts(9,24): error TS2339: Property 'get' does not exist on type 'Promise<ReadonlyRequestCookies>'.
+src/lib/csrf.ts(12,7): error TS2339: Property 'set' does not exist on type 'Promise<ReadonlyRequestCookies>'.
+src/lib/csrf.ts(18,24): error TS2339: Property 'get' does not exist on type 'Promise<ReadonlyRequestCookies>'.
+
+## Lint
+
+> lint
+> next lint || echo 'lint skipped'
+
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+   	- allowJs was set to true
+   	- skipLibCheck was set to true
+   	- incremental was set to true
+   	- include was updated to add '.next/types/**/*.ts'
+   	- plugins was updated to add { name: 'next' }
+   	- exclude was set to ['node_modules']
+
+   The following mandatory changes were made to your tsconfig.json:
+
+   	- esModuleInterop was set to true (requirement for SWC / babel)
+   	- resolveJsonModule was set to true (to match webpack resolution)
+   	- isolatedModules was set to true (requirement for SWC / Babel)
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+./src/app/cancel/success/page.tsx
+9:7  Error: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+lint skipped
+
+## Build
+
+> build
+> next build
+
+   ▲ Next.js 15.4.6
+
+   Creating an optimized production build ...
+Failed to compile.
+
+src/app/layout.tsx
+An error occurred in `next/font`.
+
+ReferenceError: module is not defined in ES module scope
+    at file:///Users/shambhavi/Desktop/cancel-flow-task-main/postcss.config.mjs:1:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+    at async findConfig (/Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/lib/find-config.js:90:21)
+    at async getPostCssPlugins (/Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:93:18)
+    at async /Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/build/webpack/config/blocks/css/index.js:125:36
+    at async /Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:94:33
+    at async Span.traceAsyncFn (/Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/trace/trace.js:157:20)
+
+src/app/layout.tsx
+An error occurred in `next/font`.
+
+ReferenceError: module is not defined in ES module scope
+    at file:///Users/shambhavi/Desktop/cancel-flow-task-main/postcss.config.mjs:1:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+    at async findConfig (/Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/lib/find-config.js:90:21)
+    at async getPostCssPlugins (/Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:93:18)
+    at async /Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/build/webpack/config/blocks/css/index.js:125:36
+    at async /Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:94:33
+    at async Span.traceAsyncFn (/Users/shambhavi/Desktop/cancel-flow-task-main/node_modules/next/dist/trace/trace.js:157:20)
+
+./src/app/cancel/confirm/page.tsx
+Module not found: Can't resolve '@/components/Progress'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/app/cancel/confirm/page.tsx
+Module not found: Can't resolve '@/lib/csrf'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/app/cancel/downsell/page.tsx
+Module not found: Can't resolve '@/components/Progress'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
